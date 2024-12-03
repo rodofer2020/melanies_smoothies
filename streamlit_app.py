@@ -1,3 +1,5 @@
+
+
 # Import python packages
 import streamlit as st
 #from snowflake.snowpark.context import get_active_session
@@ -38,6 +40,10 @@ ingredients_list =st.multiselect('Choose upt to 5 ingredients:'
 #    f"""
 #    {type(my_dataframe)}"""
 #)
+import requests
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+st.text(smoothiefroot_response)
+
 if ingredients_list:
     st.write(ingredients_list)
     st.text(ingredients_list)
@@ -56,6 +62,7 @@ if ingredients_list:
     if(time_to_insert):
         session.sql(my_insert_stmt).collect()
         st.success('Your Smoothie is ordered!', icon="✅")
+        
         #st.write("the histogram is")
         #table = session.table("smoothies.public.orders")
         #df = table.to_pandas()
